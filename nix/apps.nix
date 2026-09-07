@@ -1,8 +1,4 @@
-{
-  pkgs,
-  flake,
-  compiler-nix-name,
-}:
+{ pkgs, compiler-nix-name }:
 let
   common = import ./package/common.nix;
   inherit (pkgs) lib;
@@ -10,11 +6,6 @@ in
 {
 
   apps = {
-    tricorder = {
-      type = "app";
-      program = "${flake.packages.tricorder}/bin/tricorder";
-    };
-
     # Weeder: detects unused code
     weeder = {
       type = "app";
@@ -47,7 +38,7 @@ in
           runtimeInputs = [ pkgs.gawk ];
           text = ''
             version="''${1:?Usage: $0 <version> [changelog-file]}"
-            changelog="''${2:-tricorder/CHANGELOG.md}"
+            changelog="''${2:-'atelier-db/CHANGELOG.md'}"
             version="''${version#v}"
 
             if [[ ! -f "$changelog" ]]; then

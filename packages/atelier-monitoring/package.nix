@@ -10,7 +10,7 @@ in
     Moitoring, metrics, and tracing effects and utilities for Effectful-based
     applications —  part of the atelier toolkit.
   '';
-  github = "tweag/tricorder";
+  github = "tweag/atelier-extras";
   category = [
     "OpenTelemetry"
     "Observability"

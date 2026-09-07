@@ -7,7 +7,7 @@ in
   version = "0.3.0.0";
   synopsis = "Database-backed test utilities for atelier";
   description = "Test utilities for database-backed tests using tmp-postgres — part of the atelier toolkit.";
-  github = "tweag/tricorder";
+  github = "tweag/atelier-extras";
   category = "Testing";
   extra-doc-files = [
     "CHANGELOG.md"
