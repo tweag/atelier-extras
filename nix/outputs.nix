@@ -7,11 +7,7 @@
 }:
 let
   project = import ./project.nix {
-    inherit
-      compiler-nix-name
-      inputs
-      self
-      ;
+    inherit compiler-nix-name inputs;
   };
   shell = import ./shell.nix { inherit pkgs checks; };
   pkgs = import ./pkgs.nix {
@@ -23,7 +19,7 @@ let
       ;
   };
   inherit (pkgs) lib;
-  flake = pkgs.tricorderProject.flake { };
+  flake = pkgs.atelierProject.flake { };
   checks = import ./checks.nix {
     inherit
       system
@@ -33,31 +29,17 @@ let
       self
       ;
   };
-  template = import ./template.nix { inherit inputs pkgs compiler-nix-name; };
   docs = import ./docs.nix { inherit flake; };
   sdists = import ./sdists.nix { inherit pkgs; };
-  apps = import ./apps.nix { inherit pkgs compiler-nix-name flake; };
+  apps = import ./apps.nix { inherit pkgs compiler-nix-name; };
 in
 builtins.foldl' lib.recursiveUpdate { } [
   flake
   docs
   sdists
   checks
-  template
   apps
   {
     legacyPackages = pkgs;
-    packages = {
-      default = self.packages.${system}.tricorder;
-      tricorder = flake.packages."tricorder:exe:tricorder";
-      tricorder-mcp = flake.packages."tricorder-mcp:exe:tricorder-mcp";
-      inherit (pkgs) nix-hpack;
-    };
-
-    overlays = [
-      (final: _: {
-        tricorder = self.packages.${final.stdenv.hostPlatform.system}.tricorder;
-      })
-    ];
   }
 ]

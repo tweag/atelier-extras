@@ -13,8 +13,8 @@ category:       OpenTelemetry,
                 Observability,
                 Monitoring,
                 Tracing
-homepage:       https://github.com/tweag/tricorder#readme
-bug-reports:    https://github.com/tweag/tricorder/issues
+homepage:       https://github.com/tweag/atelier-extras#readme
+bug-reports:    https://github.com/tweag/atelier-extras/issues
 author:         Victor Nascimento Bakke
 maintainer:     victor.bakke@tweag.io
 license:        MIT
@@ -31,7 +31,7 @@ extra-doc-files:
 
 source-repository head
   type: git
-  location: https://github.com/tweag/tricorder
+  location: https://github.com/tweag/atelier-extras
 
 library
   exposed-modules:

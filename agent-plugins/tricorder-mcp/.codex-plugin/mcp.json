@@ -1,5 +1,0 @@
-{
-  "tricorder": {
-    "command": "${PLUGIN_ROOT}/servers/tricorder-mcp"
-  }
-}

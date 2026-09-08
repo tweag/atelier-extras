@@ -1,6 +1,5 @@
 {
   compiler-nix-name,
-  self,
   inputs,
 }:
 let
@@ -29,22 +28,9 @@ in
         # Disable tests for tmp-postgres
         tmp-postgres.doCheck = false;
 
-        atelier-prelude = component;
-        atelier-core = component;
         atelier-db = component;
         atelier-testing = component;
         atelier-monitoring = component;
-        tricorder-mcp = component;
-        tricorder-types = component;
-
-        # Configure tricorder package
-        tricorder = component // {
-          # Embed the flake's git revision so the released binary carries the
-          # correct hash. Falls back to "unknown" on dirty trees (no shortRev).
-          preBuild = ''
-            export TRICORDER_VERSION="${self.shortRev or "unknown"}"
-          '';
-        };
       };
     }
   ];

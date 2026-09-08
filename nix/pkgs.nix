@@ -8,8 +8,9 @@ import (if system == "x86_64-darwin" then inputs.nixpkgs-2605 else inputs.nixpkg
   inherit system;
   overlays = [
     inputs.haskell-nix.overlay
+    inputs.tricorder.overlays.nix-hpack
     (final: _: {
-      tricorderProject = final.haskell-nix.hix.project (
+      atelierProject = final.haskell-nix.hix.project (
         project
         // {
           # uncomment with your current system for `nix flake show` to work:
@@ -17,8 +18,6 @@ import (if system == "x86_64-darwin" then inputs.nixpkgs-2605 else inputs.nixpkg
           inherit shell;
         }
       );
-      tricorder = (final.tricorderProject.flake { }).packages."tricorder:exe:tricorder";
-      nix-hpack = final.callPackage ./package/nix-hpack.nix { };
     })
 
   ];

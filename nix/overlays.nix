@@ -6,7 +6,7 @@
 [
   inputs.haskell-nix.overlay
   (final: _prev: {
-    tricorderProject = final.haskell-nix.hix.project (
+    atelierProject = final.haskell-nix.hix.project (
       project
       // {
         # uncomment with your current system for `nix flake show` to work:
