@@ -11,7 +11,7 @@ description:    Instrument an oblivious Effectful program with Taps, discharge i
 category:       Control
 homepage:       https://github.com/atelier-hub/tricorder/tree/main/atelier-observe
 bug-reports:    https://github.com/atelier-hub/tricorder/issues
-author:         Victor Nascimento Bakke
+author:         Christian Georgii
 maintainer:     victor.bakke@tweag.io
 license:        MIT
 license-file:   LICENSE

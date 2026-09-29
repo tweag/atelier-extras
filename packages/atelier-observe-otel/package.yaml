@@ -1,0 +1,121 @@
+
+
+author: Christian Georgii
+category: Control
+default-extensions:
+  - BlockArguments
+  - DataKinds
+  - DeriveAnyClass
+  - DerivingStrategies
+  - DerivingVia
+  - DuplicateRecordFields
+  - FlexibleContexts
+  - GADTs
+  - LambdaCase
+  - MultiWayIf
+  - OverloadedLabels
+  - OverloadedRecordDot
+  - OverloadedStrings
+  - StrictData
+  - TemplateHaskell
+  - TypeFamilies
+dependencies:
+  - name: effectful-core
+    version: '>=2.6 && <2.7'
+  - name: effectful-plugin
+    version: '>=2.0 && <2.2'
+description: 'Fold an atelier-observe Moment stream into OpenTelemetry spans: a Consumer that turns instrumented runs into traces, with signals as attributes, failures as error status, and links between traces. Part of the atelier toolkit.'
+extra-doc-files:
+  - CHANGELOG.md
+  - README.md
+ghc-options:
+  - -Weverything
+  - -Wno-unsafe
+  - -Wno-missing-safe-haskell-mode
+  - -Wno-monomorphism-restriction
+  - -Wno-missing-kind-signatures
+  - -Wno-missing-local-signatures
+  - -Wno-missing-import-lists
+  - -Wno-implicit-prelude
+  - -Wno-unticked-promoted-constructors
+  - -Wno-unused-packages
+  - -Wno-all-missed-specialisations
+  - -Wno-missed-specialisations
+  - -fplugin=Effectful.Plugin
+  - -threaded
+github: atelier-hub/tricorder
+homepage: https://github.com/atelier-hub/tricorder/tree/main/atelier-observe-otel
+language: GHC2021
+library:
+  dependencies:
+    - mixin:
+        - hiding (Prelude)
+      name: base
+      version: '>=4.18 && < 4.23'
+    - name: atelier-prelude
+      version: '>=0.1 && <0.3'
+    - name: atelier-observe
+      version: ^>=0.1
+    - name: containers
+      version: '>=0.6 && <0.9'
+    - name: effectful
+      version: '>=2.6 && <2.7'
+    - name: hs-opentelemetry-api
+      version: '>=0.3 && <0.4'
+    - name: hs-opentelemetry-exporter-otlp
+      version: '>=0.1 && <0.2'
+    - name: hs-opentelemetry-sdk
+      version: '>=0.1 && <0.2'
+    - name: text
+      version: '>=2.1 && <2.2'
+    - name: unordered-containers
+      version: '>=0.2 && <0.3'
+  source-dirs: src
+license: MIT
+license-file: LICENSE
+maintainer: victor.bakke@tweag.io
+name: atelier-observe-otel
+synopsis: OpenTelemetry exporter for atelier-observe
+tests:
+  atelier-observe-otel-test:
+    build-tools:
+      - tasty-discover:tasty-discover
+    dependencies:
+      - mixin:
+          - hiding (Prelude)
+        name: base
+        version: '>=4.18 && < 4.23'
+      - name: atelier-prelude
+        version: '>=0.1 && <0.3'
+      - name: atelier-observe
+        version: ^>=0.1
+      - name: atelier-observe-otel
+        version: ^>=0.1
+      - name: async
+        version: '>=2.2 & <2.3'
+      - name: effectful
+        version: '>=2.6 && <2.7'
+      - name: hs-opentelemetry-api
+        version: '>=0.3 && <0.4'
+      - name: hspec
+        version: '>=2.11 && <2.12'
+      - name: tasty
+        version: '>=1.5 && <1.6'
+      - name: tasty-discover
+        version: '>=5.2 && <5.3'
+      - name: tasty-hspec
+        version: '>=1.2 && <1.3'
+      - name: text
+        version: '>=2.1 && <2.2'
+      - name: unordered-containers
+        version: '>=0.2 && <0.3'
+    ghc-options:
+      - -Wno-prepositive-qualified-module
+    main: Driver.hs
+    source-dirs: test
+version: 0.1.0.0
+when:
+  - condition: impl(GHC >= 9.8)
+    ghc-options:
+      - -Wno-missing-poly-kind-signatures
+      - -Wno-missing-role-annotations
