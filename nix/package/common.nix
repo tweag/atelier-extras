@@ -27,7 +27,7 @@ let
   ];
 in
 {
-  author = "Victor Nascimento Bakke";
+  author = "Christian Georgii";
   maintainer = "victor.bakke@tweag.io";
   license = "MIT";
   license-file = "LICENSE";
