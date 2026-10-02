@@ -21,5 +21,7 @@ import (if system == "x86_64-darwin" then inputs.nixpkgs-2605 else inputs.nixpkg
     })
 
   ];
-  inherit (inputs.haskell-nix) config;
+  config = inputs.haskell-nix.config // {
+    allowUnfree = true;
+  };
 }
