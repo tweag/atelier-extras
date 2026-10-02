@@ -22,6 +22,11 @@ import (if system == "x86_64-darwin" then inputs.nixpkgs-2605 else inputs.nixpkg
 
   ];
   config = inputs.haskell-nix.config // {
-    allowUnfree = true;
+    allowUnfreePredicate =
+      pkg:
+      (inputs.haskell-nix.config.allowUnfreePredicate or (_: false)) pkg
+      || builtins.elem (inputs.nixpkgs.lib.getName pkg) [
+        "ghc-toolchain-lib-ghc-toolchain"
+      ];
   };
 }
