@@ -11,7 +11,7 @@ description:    Test utilities for database-backed tests using tmp-postgres — 
 category:       Testing
 homepage:       https://github.com/tweag/atelier-extras#readme
 bug-reports:    https://github.com/tweag/atelier-extras/issues
-author:         Victor Nascimento Bakke
+author:         Christian Georgii
 maintainer:     victor.bakke@tweag.io
 license:        MIT
 license-file:   LICENSE
