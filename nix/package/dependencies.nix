@@ -4,19 +4,43 @@ let
     version = constraints.${name};
   };
   depList = map dep;
-  constraints = {
+  inherit (import ./common.nix) packageNames;
+  inherit (builtins)
+    splitVersion
+    listToAttrs
+    length
+    genList
+    elemAt
+    concatStringsSep
+    ;
+  take =
+    count: list:
+    let
+      len = length list;
+    in
+    genList (elemAt list) (if count > len then len else count);
+  packageVersions = listToAttrs (
+    map (name: {
+      inherit name;
+      value =
+        let
+          inherit (import ../../packages/${name}/package.nix) version;
+        in
+        "^>=${concatStringsSep "." (take 2 (splitVersion version))}";
+    }) packageNames
+  );
+  constraints = packageVersions // {
     Cabal = ">=3.12 && <3.19";
     Cabal-syntax = ">=3.12 && <3.19";
     aeson = ">=2.2 && <2.4";
     atelier-core = ">=0.3 && <0.5";
-    atelier-db = ">=0.1 && <0.4";
-    atelier-monitoring = ">=0.1 && <0.2";
     atelier-prelude = ">=0.1 && <0.3";
     base = ">=4.18 && < 4.23";
     base64-bytestring = ">=1.2 && <1.3";
     brick = ">=2.10 && <2.14";
     bytestring = ">=0.11 && <0.13";
     casing = ">=0.1 && <0.2";
+    comonad = ">=5.0 && <5.1";
     containers = ">=0.6 && <0.9";
     daemons = ">=0.4 && <0.5";
     data-default = ">=0.8 && <0.9";
@@ -26,6 +50,7 @@ let
     effectful-plugin = ">=2.0 && <2.2";
     effectful-th = ">=1.0 && <1.1";
     filepath = ">=1.4 && <1.6";
+    foldl = ">=1.4 && <1.5";
     fsnotify = ">=0.4 && <0.5";
     hashable = ">=1.5 && <1.6";
     hasql = ">=1.9 && <1.11";
@@ -42,6 +67,7 @@ let
     list-t = ">=1.0 && <1.1";
     mcp-server = ">=0.2 && <0.3";
     megaparsec = ">=9.7 && <9.9";
+    monoidal-containers = ">=0.6 && <0.7";
     mtl = ">=2.3 && <2.4";
     network = ">=3.2 && <3.3";
     optparse-applicative = ">=0.19 && <0.20";
